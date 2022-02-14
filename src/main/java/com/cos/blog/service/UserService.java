@@ -1,10 +1,11 @@
 package com.cos.blog.service;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.cos.blog.model.RoleType;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.UserRepository;
 
@@ -27,6 +28,9 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private BCryptPasswordEncoder encode;
+	
 	// 트랜잭션 : 일이 처리되기 위한 가장 작은 단위
 	// 여러 개의 트랜잭션을 묶어서 하나의 트랜잭션으로 만들 수도 있다.
 	// DB 격리 수준: READ COMMIT
@@ -39,6 +43,19 @@ public class UserService {
 	// REPEATABLE READ 이상 방식을 사용하면 부정합이 발생하지 않는다.
 	@Transactional
 	public void 회원가입(User user) {
+
+		String rawPassword = user.getPassword();
+		String encPassword = encode.encode(rawPassword);
+		user.setPassword(encPassword);
+		user.setRole(RoleType.USER);
 		userRepository.save(user);
 	}
+
 }
+
+//전통적인 로그인 방식(시큐리티 사용하지 않는 방식)
+//@Transactional(readOnly=true) // Select할 때 트랜잭션 시작, 서비스 종료 시에 트랜잭션 종료(정합성)
+//public User 로그인(User user) {
+//	
+//	return userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+//}

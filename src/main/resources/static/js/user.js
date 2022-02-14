@@ -37,7 +37,7 @@ let index = {
 		$.ajax({
 			// 회원가입 수행 요청
 			type: "POST",
-			url: "/blog/api/user",
+			url: "/auth/joinProc",
 			data: JSON.stringify(data), // http body 데이터
 			contentType: "application/json; charset=uft-8", // body 데이터가 어떤 타입인지(MIME)
 			dataType: "json" // 서버로부터 응답이 왔을 때 기본적으로 모든 데이터는 문자열임. 만약 생긴 게 json이라면 => javascript 오브젝트로 바꾸어줌.
@@ -46,12 +46,43 @@ let index = {
 			// 정상일 시
 			alert("회원가입이 완료되었습니다.");
 			console.log(response);
-			location.href="/blog";
+			location.href="/";
 		}).fail(function(error) {
 			// 실패할 시
 			alert(JSON.stringify(error));
 		}); 
-	}
+	},
+	
 }
 
 index.init();
+
+
+// 전통적인 로그인방식
+	/*$("#btn-login").on("click", ()=>{ // 화살표 함수는 this를 바인딩하기 위해서 사용한다!!
+			this.login();
+		});*/
+
+	/*login: function() {
+		//alert("user의 save함수 호출됨.");
+		let data = {
+			username: $("#username").val(),
+			password: $("#password").val()
+		};
+
+		$.ajax({
+			type: "POST",
+			url: "/api/user/login",
+			data: JSON.stringify(data), // http body 데이터
+			contentType: "application/json; charset=uft-8", // body 데이터가 어떤 타입인지(MIME)
+			dataType: "json" // 서버로부터 응답이 왔을 때 기본적으로 모든 데이터는 문자열임. 만약 생긴 게 json이라면 => javascript 오브젝트로 바꾸어줌.
+			// 이제 버전이 업그레이드되어서 "json"이 defalut 값이 됨.
+		}).done(function(response) {
+			// 정상일 시
+			alert("로그인이 완료되었습니다.");
+			location.href="/";
+		}).fail(function(error) {
+			// 실패할 시
+			alert(JSON.stringify(error));
+		}); 
+	}*/
