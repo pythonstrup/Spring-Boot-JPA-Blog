@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 			.csrf().disable() // crsf 토큰 비활성화 (테스트 시 걸어두는 게 좋음.) 테스트가 끝난 후 활성화, ajax 요청 시 csrf 토큰을 전송해줘야함.  
 			.authorizeRequests()
-				.antMatchers("/", "/auth/**", "/js/**", "/css/**", "/image/**")
+				.antMatchers("/", "/auth/**", "/js/**", "/css/**", "/image/**", "/dummy/**")
 				.permitAll()
 				.anyRequest()
 				.authenticated()

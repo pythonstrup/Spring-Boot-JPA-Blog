@@ -40,7 +40,6 @@ public class Board {
 	@Lob // 대용량 데이터
 	private String content; // 섬머노트 라이브러리 <html>태그가 섞여서 디자인 됨 -> 용랑커짐
 	
-	@ColumnDefault("0") // 디폴트값 정수 0
 	private int count; // 조회수
 	
 	// manyToOne의 기본 펫치전략 = eager
