@@ -3,6 +3,9 @@ let index = {
 		$("#btn-save").on("click", ()=>{ // 화살표 함수는 this를 바인딩하기 위해서 사용한다!!
 			this.save();
 		});
+		$("#btn-update").on("click", ()=>{ 
+			this.update();
+		});
 	},
 	
 	save: function() {
@@ -53,6 +56,32 @@ let index = {
 		}); 
 	},
 	
+	
+	update: function() {
+		let data = {
+			id: $("#id").val(),
+			username: $("#username").val(),
+			password: $("#password").val(),
+			email: $("#email").val()
+		};
+		
+		$.ajax({
+			// 회원 수정 요청
+			type: "PUT",
+			url: "/user",
+			data: JSON.stringify(data), // http body 데이터
+			contentType: "application/json; charset=uft-8", // body 데이터가 어떤 타입인지(MIME)
+			dataType: "json" 
+		}).done(function(response) {
+			// 정상일 시
+			alert("회원수정이 완료되었습니다.");
+			console.log(response);
+			location.href="/";
+		}).fail(function(error) {
+			// 실패할 시
+			alert(JSON.stringify(error));
+		}); 
+	},
 }
 
 index.init();
