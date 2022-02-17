@@ -31,7 +31,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 프로젝트에서 연결된 DB의 넘버링 전략을 따라간다. - identity
 	private int id; // aoto_increment
 	
-	@Column(nullable=false, length=30, unique=true)
+	@Column(nullable=false, length=100, unique=true)
 	private String username; // 아이디
 	
 	@Column(nullable=false, length=100)
@@ -44,6 +44,8 @@ public class User {
 	// DB는 RoleType이라는 게 없다. - 어노테이션으로 Enum타입이 String이라고 알려줘야함
 	@Enumerated(EnumType.STRING)
 	private RoleType role; // String보다 Enum을 쓰는 것이 좋다. (데이터의 도메인을 만들기 위해서) - ex) admin, user, manger
+	
+	private String oauth; // kakao, google
 	
 	@CreationTimestamp // 시간이 자동 입력
 	private Timestamp createDate;
