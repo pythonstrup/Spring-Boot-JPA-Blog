@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.blog.config.auth.PrincipalDetail;
+import com.cos.blog.dto.ReplySaveRequestDTO;
 import com.cos.blog.dto.ResponseDTO;
 import com.cos.blog.model.Board;
+import com.cos.blog.model.Reply;
+import com.cos.blog.repository.ReplyRepository;
 import com.cos.blog.service.BoardService;
 
 @RestController
@@ -20,6 +23,9 @@ public class BoardApiController {
 	
 	@Autowired 
 	private BoardService boardService;
+	
+	@Autowired
+	private ReplyRepository replyRepository;
 	
 	// http://localhost:8000/blog/api/user
 	@PostMapping("/api/board")
@@ -43,7 +49,14 @@ public class BoardApiController {
 		return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
 	}
 	
-	
+	// 데이터를 받을 때 컨트롤러에서 dto를 만들어서 받는 게 좋다.
+	// 그렇다면 만약 dto 사용하지 않는다면 그 이유는??? - 프로그램이 커질까봐.
+	@PostMapping("/api/board/{boardId}/reply")
+	public ResponseDTO<Integer> replySave(@RequestBody ReplySaveRequestDTO replySaveRequestDTO) { 
+		
+		boardService.댓글쓰기(replySaveRequestDTO);
+		return new ResponseDTO<Integer>(HttpStatus.OK.value(), 1);
+	}
 }
 
 

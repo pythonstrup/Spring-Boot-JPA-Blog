@@ -24,7 +24,8 @@
 	
 	
 </div>
-		
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <%@ include file="../layout/footer.jsp" %>
 
 
