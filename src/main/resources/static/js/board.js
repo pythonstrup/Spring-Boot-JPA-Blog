@@ -109,6 +109,23 @@ let index = {
 			alert(JSON.stringify(error));
 		}); 
 	},
+	
+	replyDelete: function(boardId, replyId) {
+		$.ajax({
+			// 댓글 삭제 수행 요청
+			type: "DELETE",
+			url: `/api/board/${boardId}/reply/${replyId}`, 
+			dataType: "json" 
+		}).done(function(response) {
+			// 정상일 시
+			alert("댓글삭제가 완료되었습니다.");
+			location.href=`/board/${boardId}`;
+		}).fail(function(error) {
+			// 실패할 시
+			console.log(JSON.stringify(error))
+			alert(JSON.stringify(error));
+		}); 
+	},
 }
 
 index.init();

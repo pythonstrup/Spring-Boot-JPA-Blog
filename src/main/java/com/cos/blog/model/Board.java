@@ -3,6 +3,7 @@ package com.cos.blog.model;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -50,7 +51,8 @@ public class Board {
 	private User user; // DB는 오브젝트를 저장할 수 없다. 반면  FK, 자바는 오브젝트를 저장할 수 있다.
 	
 	// oneTomany의 기본 펫치전략 = lazy
-	@OneToMany(mappedBy="board", fetch=FetchType.EAGER) // mappedBy가 적혀있으면? 연관관계의 주인이 아니다.(난 FK가 아니에요) DB에 칼럼을 만들지 마세요.
+	// mappedBy가 적혀있으면? 연관관계의 주인이 아니다.(난 FK가 아니에요) DB에 칼럼을 만들지 마세요.
+	@OneToMany(mappedBy="board", fetch=FetchType.EAGER, cascade=CascadeType.REMOVE) 
 	@JsonIgnoreProperties({"board"}) // 무한참조 방지..
 	@OrderBy("id desc")
 	private List<Reply> replys;

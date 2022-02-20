@@ -46,14 +46,19 @@ let index = {
 			dataType: "json" // 서버로부터 응답이 왔을 때 기본적으로 모든 데이터는 문자열임. 만약 생긴 게 json이라면 => javascript 오브젝트로 바꾸어줌.
 			// 이제 버전이 업그레이드되어서 "json"이 defalut 값이 됨.
 		}).done(function(response) {
-			// 정상일 시
-			alert("회원가입이 완료되었습니다.");
-			console.log(response);
-			location.href="/";
+			if (response.status === 500){
+				// 아이디 중복 처리
+				alert("회원가입이 실패했습니다.");
+			} else {
+				// 정상일 시
+				alert("회원가입이 완료되었습니다.");
+				location.href="/";	
+			}
+			
 		}).fail(function(error) {
 			// 실패할 시
 			alert(JSON.stringify(error));
-		}); 
+		});
 	},
 	
 	
