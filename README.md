@@ -2,7 +2,7 @@
 
 <hr/>
 
-### 출처
+### 참고
 
 - 메타코딩: [나만의 블로그 만들기](https://www.youtube.com/watch?v=6bhF5o4gAOs&list=PL93mKxaRDidECgjOBjPgI3Dyo8ka6Ilqm)
 
